@@ -27,7 +27,7 @@ fn remove_datetime_from_message(message: String, config: Config) -> String {
 #[allow(clippy::module_inception)]
 #[cfg(test)]
 mod tests {
-    use crate::{drivers::test::TestLogger, tests::remove_datetime_from_message, Config, Ftail};
+    use crate::{channels::test::TestLogger, tests::remove_datetime_from_message, Config, Ftail};
     use log::{Level, Log, Metadata, Record};
     use std::sync::{Arc, Mutex};
 
@@ -87,11 +87,10 @@ mod tests {
 
         let logs = buffer.lock().unwrap();
 
-        return logs
-            .iter()
+        logs.iter()
             .map(|log| log.to_string())
             .collect::<Vec<String>>()
-            .join("\n");
+            .join("\n")
     }
 
     #[test]
@@ -149,7 +148,7 @@ mod tests {
 
         let message = get_message_from_logger(&config, metadata, args);
 
-        assert_eq!(message, "AEST DEBUG test Hello, world!");
+        assert_eq!(message, "AEDT DEBUG test Hello, world!");
     }
 
     #[test]
