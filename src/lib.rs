@@ -14,7 +14,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! ftail = "0.1"
+//! ftail = "0.2"
 //! ```
 //!
 //! Add the following code to your `main.rs` or `lib.rs` file:
