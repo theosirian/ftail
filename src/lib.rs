@@ -41,6 +41,7 @@
 //! - `.datetime_format("%Y-%m-%d %H:%M:%S.3f")` to set the datetime format
 //! - `.timezone(ftail::Tz::UTC)` to set the timezone [requires feature `timezone`]
 //! - `.max_file_size(100)` to set the maximum file size in MB (will move older logs to .old{N})
+//! - `.retention_days(7)` to set the number of days to keep the log files (daily file only)
 //! - `.filter_levels(vec![Level::Debug, Level::Error])` only log messages with the specified levels
 //! - `.filter_targets(vec!["foo", "bar"])` only log messages with the specified targets
 //!
@@ -234,6 +235,7 @@ pub struct Config {
     #[cfg(feature = "timezone")]
     pub timezone: chrono_tz::Tz,
     pub max_file_size: Option<u64>,
+    pub retention_days: Option<u64>,
     pub levels: Option<Vec<Level>>,
     pub targets: Option<Vec<String>>,
 }
@@ -266,6 +268,13 @@ impl Ftail {
     /// Set the maximum file size for the logger.
     pub fn max_file_size(mut self, max_file_size_in_mb: u64) -> Self {
         self.config.max_file_size = Some(max_file_size_in_mb * 1024 * 1024);
+
+        self
+    }
+
+    /// Set the retention days for the logger (daily file logger only).
+    pub fn retention_days(mut self, retention_days: u64) -> Self {
+        self.config.retention_days = Some(retention_days);
 
         self
     }
