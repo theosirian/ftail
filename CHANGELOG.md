@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.1 (2025-03-04)
+
+- Add retention policy to daily file channel
+
 ## v0.2.0 (2024-12-22)
 
 - Rename drivers to channels
