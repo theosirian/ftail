@@ -409,7 +409,8 @@ impl Log for Ftail {
                 .targets
                 .as_ref()
                 .unwrap()
-                .contains(&metadata.target().to_string())
+                .iter()
+                .any(|t| metadata.target().to_string().starts_with(t))
         {
             return false;
         }
